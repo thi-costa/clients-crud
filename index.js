@@ -22,6 +22,21 @@ server.post("/clients", checkClientExists, (req, res) => {
     return res.json(clients); // Returns clients variable information
 });
 
+server.put(
+    "/clients/:index",
+    checkClientExists,
+    checkClientInArray,
+    (req, res) => {
+        const { index } = req.params; // Gets index of data
+
+        const { name } = req.body;
+
+        clients[index] = name; // Changes the name in the array
+
+        return res.json(clients);
+    }
+);
+
 
 server.listen(3000); // server executed on port 3000 from localhost:3000
 

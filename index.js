@@ -65,3 +65,13 @@ function checkClientExists(req, res, next) {
         return next(); // if name was informed correctly, function next() will call next actions
 }
 
+function checkClientInArray(req, res, next) {
+    const client = clients[req.params.index];
+    if (!client) {
+        return res.status(400).json({ error: "client does not exists" }); // checks if client exists on the array, if it is negative informs index does not exist on array
+    }
+
+    req.client = client;
+
+    return next();
+}

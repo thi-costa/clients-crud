@@ -37,6 +37,13 @@ server.put(
     }
 );
 
+server.delete("/clients/:index", (req, res) => {
+    const { index } = req.params; // Gets index of data
+
+    clients.splice(index, 1); // Deletes on the position
+
+    return res.send();
+});
 
 server.listen(3000); // server executed on port 3000 from localhost:3000
 

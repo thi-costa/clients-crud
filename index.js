@@ -47,3 +47,21 @@ server.delete("/clients/:index", (req, res) => {
 
 server.listen(3000); // server executed on port 3000 from localhost:3000
 
+function checkClientExists(req, res, next) {
+    if (!req.body.email) {
+        return res.status(400).json({ error: "client email is required" });
+    }
+    if (
+        (!req.body.name )
+    ) {
+        return res.status(400).json({ error: "client name is required" }); // local middleware local will check if name property was informed correctly
+    }
+    if (!req.body.username){
+        return res.status(400).json({ error: "client username is required" });
+    }
+    if (!req.body.password) {
+        return res.status(400).json({ error: "client password is required" });
+    }
+        return next(); // if name was informed correctly, function next() will call next actions
+}
+
